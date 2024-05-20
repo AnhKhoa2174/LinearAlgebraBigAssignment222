@@ -1,0 +1,629 @@
+\documentclass[a4paper]{article}
+\usepackage{vntex}
+\usepackage[english]{babel}
+%\usepackage[utf8]{inputenc}
+
+%\usepackage[utf8]{inputenc}
+%\usepackage[francais]{babel}
+\usepackage{a4wide,amssymb,epsfig,latexsym,multicol,array,hhline,fancyhdr}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{amsmath}
+\usepackage[table]{xcolor}
+\usepackage{tabularx}
+\usepackage{lastpage}
+\usepackage{setspace}
+\usepackage[lined,boxed,commentsnumbered]{algorithm2e}
+\usepackage{enumerate}
+\usepackage{color}
+\usepackage{graphicx}							% Standard graphics package
+\usepackage{array}
+\usepackage{apacite}
+\usepackage{tabularx, caption}
+\usepackage{multirow}
+\usepackage[framemethod=tikz]{mdframed}% For highlighting paragraph backgrounds
+\usepackage{multicol}
+\usepackage{rotating}
+\usepackage{graphics}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{epsfig}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{listings}
+\usetikzlibrary{arrows,snakes,backgrounds}
+\usepackage{hyperref}
+\hypersetup{urlcolor=blue,linkcolor=black,citecolor=black,colorlinks=true} 
+%\usepackage{pstcol} 								% PSTricks with the standard color package
+
+
+\everymath{\color{blue}}
+%\usepackage{fancyhdr}
+\setlength{\headheight}{40pt}
+\pagestyle{fancy}
+\fancyhead{} % clear all header fields
+\fancyhead[L]{
+	\begin{tabular}{rl}
+		\begin{picture}(25,15)(0,0)
+			\put(0,-8){\includegraphics[width=8mm, height=8mm]{hcmut.png}}
+			%\put(0,-8){\epsfig{width=10mm,figure=hcmut.eps}}
+		\end{picture}&
+		%\includegraphics[width=8mm, height=8mm]{hcmut.png} & %
+		\begin{tabular}{l}
+			\textbf{\bf \ttfamily HO CHI MINH CITY UNIVERSITY OF TECHNOLOGY}\\
+			\textbf{\bf \ttfamily FACULTY OF APPLIED SCIENCE}
+		\end{tabular} 	
+	\end{tabular}
+}
+\fancyhead[R]{
+	\begin{tabular}{l}
+		\tiny \bf \\
+		\tiny \bf 
+\end{tabular}  }
+\fancyfoot{} % clear all footer fields
+\fancyfoot[L]{\scriptsize \ttfamily LINEAR ALGEBRA (MT1008) PROJECT - 2022-2023}
+\fancyfoot[R]{\scriptsize \ttfamily PAGE {\thepage}/\pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0.3pt}
+
+
+%%%
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{3}
+\makeatletter
+\newcounter {subsubsubsection}[subsubsection]
+\renewcommand\thesubsubsubsection{\thesubsubsection .\@alph\c@subsubsubsection}
+\newcommand\subsubsubsection{\@startsection{subsubsubsection}{4}{\z@}%
+	{-3.25ex\@plus -1ex \@minus -.2ex}%
+	{1.5ex \@plus .2ex}%
+	{\normalfont\normalsize\bfseries}}
+\newcommand*\l@subsubsubsection{\@dottedtocline{3}{10.0em}{4.1em}}
+\newcommand*{\subsubsubsectionmark}[1]{}
+\makeatother
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+	language=Matlab,
+	aboveskip=3mm,
+	belowskip=3mm,
+	showstringspaces=false,
+	columns=flexible,
+	basicstyle={\small\ttfamily},
+	numbers=none,
+	numberstyle=\tiny\color{gray},
+	keywordstyle=\color{blue},
+	commentstyle=\color{dkgreen},
+	stringstyle=\color{mauve},
+	breaklines=true,
+	breakatwhitespace=true,
+	tabsize=3,
+	numbers=left,
+	stepnumber=1,
+	numbersep=1pt,    
+	firstnumber=1,
+	numberfirstline=true
+}
+\usepackage{indentfirst}
+\setlength{\parskip}{2em}
+\newenvironment{forceindent}{\parindent2em\ignorespaces}{\par}
+\renewcommand{\baselinestretch}{1.15}
+
+\begin{document}
+	\justify
+	{\fontsize{10}{10}\selectfont
+		\begin{titlepage}
+			\begin{center}
+				VIETNAM NATIONAL UNIVERSITY HO CHI MINH CITY \\
+				HO CHI MINH CITY UNIVERSITY OF TECHNOLOGY \\
+				FACULTY OF APPLIED SCIENCE 
+			\end{center}
+			
+			\vspace{1cm}
+			
+			\begin{figure}[h!]
+				\begin{center}
+					\includegraphics[width=3cm]{hcmut.png}
+				\end{center}
+			\end{figure}
+			
+			\vspace{1cm}
+			
+			
+			\begin{center}
+				\begin{tabular}{c}
+					\multicolumn{1}{l}{\textbf{{\Large LINEAR ALGEBRA (MT1008)}}}\\
+					~~\\
+					\hline
+					\\
+					\multicolumn{1}{l}{\textbf{{\Large Application of Linear Algebra }}}\\
+					\\
+					
+					\textbf{{\Huge Singular Value Decomposition (SVD) }}\\
+					\\
+					\hline
+				\end{tabular}
+			\end{center}
+			
+			\vspace{3cm}
+			
+			\begin{table}[h]
+				\begin{tabular}{rrl}
+					\hspace{5 cm} & Instructor: &Nguyễn Tiến Dũng\\
+					& Student: & Nguyễn Hải Đăng - 2252153\\
+					& & Li Shu Feng - 2252616 \\
+					& & Vương Khang - 2250008\\
+					& & Trần Anh Khoa - 2252362 \\
+					& & Phan Thanh Sơn - 2252718\\
+				\end{tabular}
+			\end{table}
+			
+			\begin{center}
+				{\footnotesize HO CHI MINH CITY, 5/2023}
+			\end{center}
+		\end{titlepage}
+		
+		
+		
+		
+		\newpage
+		\tableofcontents
+		\newpage
+		\section{Introduction} 
+		Data compression has become more and more crucial in today's digital environment for effective information storage and delivery. Singular Value Decomposition (SVD), a method for data compression with roots in linear algebra, is one of the most efficient and dependable techniques. For academics and professionals in numerous sectors, a greater comprehension of how linear algebra is used in SVD for compression is essential.
+		
+		This research paper's main objective is to investigate how SVD uses linear algebra to compress data. We will try to explain how using linear algebra in Singular Value Decomposition results in the development of more effective compression methods.
+		
+		Before attempting to answer this topic, the fundamental concepts of linear algebra will be reviewed and an outline of singular value decomposition will be provided.. The use of SVD in data compression will next be examined, highlighting the methods and algorithms utilized to compress pictures, audio, and video. Finally, the advantages and disadvantages of SVD compression will be discussed and contrasted with other widely used compression techniques.
+		
+		
+		This study intends to contribute to the continuous development of more efficient and effective data compression algorithms by providing a full knowledge of the function of linear algebra in SVD for compression.
+		\newpage
+		
+		\section{Background}
+		The study of linear systems and their algebraic properties is the subject of the mathematical field known as linear algebra. It covers the handling and analysis of matrices, vectors, and linear equations and serves as the basis for many scientific and technical specialties.
+		
+		Vectors and vector spaces are the fundamental ideas in linear algebra. Mathematical entities known as vectors have both magnitude and direction, and vector spaces are collections of vectors that follow a set of addition and scalar multiplication rules. Another crucial component of linear algebra is the use of matrices, which are rectangular arrays of numbers or symbols that can be used to represent data from a variety of sources or systems of linear equations.
+		
+		Understanding and solving issues involving linear transformations require the use of eigenvalues and eigenvectors, two essential elements of linear algebra. In several applications, including differential equations and stability analysis, these ideas enable the diagonalization of matrices and make it easier to simplify calculations.
+		
+		Numerous real-world uses of linear algebra can be found in a variety of fields. When performing transformations, rotations, and scaling operations on objects and data in computer science, this technique is used in computer graphics and machine learning. The modeling and analysis of phenomena like electrical circuits, structural mechanics, and fluid dynamics are all done using linear algebra in physics and engineering. Additionally, the use of linear algebra in the social and behavioral sciences helps with data interpretation, resource allocation, and production and consumption problems, as well as modeling and data interpretation.
+		
+		Furthermore, the use of Singular Value Decomposition (SVD) and Principal Component Analysis (PCA) to reduce the dimensionality of data and extract significant characteristics is a key application of linear algebra in data compression and signal processing. These approaches provide a substantial contribution to the creation of effective and efficient image and audio processing, data analysis, and data compression techniques in a variety of scientific and technical domains. However, the focus of this report is on the application of Singular Value Decomposition and its connection to linear algebra.
+		\newpage
+		\section{Core concepts}
+		\subsection{Definition of the SVD}
+		Generally, we are interested in analyzing a large data set $X \in \mathbb{C}^{n \times m}$
+		\[
+		X =
+		\begin{bmatrix}
+			\begin{array}{c}
+				\vdots \\
+				x_1 \\
+				\vdots
+			\end{array}
+			&
+			\begin{array}{c}
+				\vdots \\
+				x_2 \\
+				\vdots
+			\end{array}
+			&
+			\cdots
+			&
+			\begin{array}{c}
+				\vdots \\
+				x_m \\
+				\vdots
+			\end{array}
+		\end{bmatrix}
+		\]
+		The columns $x_k \in \mathbb{C}^n$ could originate from experimental or simulated data. For instance, columns might correspond to images that have been converted into column vectors, each containing as many elements as there are pixels in the image. Alternatively, the column vectors might represent the state of a physical system changing over time, such as fluid velocity at discrete locations, a collection of neural measurements, or the condition of a weather simulation with a one-square-kilometer resolution. (Brunton \& Kutz, 2019a)
+		
+		
+		The index k serves as a label for the $k^{th}$ unique set of measurements. In numerous examples throughout this book, X will comprise a time-series of data, with $x_k = x(k\Delta t)$. Generally, the state-dimension n is quite large, encompassing millions or even billions of degrees of freedom. The columns are frequently referred to as snapshots, and m denotes the total number of snapshots in X. For many systems, $n \gg m$ holds true, leading to a tall and skinny matrix as opposed to a short and fat matrix when $n \ll m$. (Brunton \& Kutz, 2019)
+		
+		
+		The SVD is a distinct matrix decomposition that exists for every complex-valued matrix $X \in \mathbb{C}^{n \times m}$
+		\[
+		\textbf{X} = \textbf{U} \boldsymbol{\Sigma} \textbf{V}^{*}          (1)
+		\]
+		where $U \in \mathbb{C}^{n \times m}$ and $V \in \mathbb{C}^{n \times m}$ are unitary matrices (A square matrix U is unitary if $UU^{*} = U^{*}U = I$) containing orthonormal columns, and $\Sigma \in \mathbb{R}^{n \times m}$ is a matrix with real, non-negative diagonal entries and zeros off the diagonal. In this context, * represents the complex conjugate transpose (For real-valued matrices, this is equivalent to the regular transpose $X^{*} = X^{T}$). As we will see throughout this chapter, the requirement that U and V be unitary is employed extensively. (Brunton \& Kutz, 2019a)
+		
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.5\textwidth]{fig1.1.png}
+			\caption[Caption for the list of figures]{Schematic of matrices in the full SVD (Brunton \& Kutz, 2019)\protect}
+			\label{fig:example}
+		\end{figure}
+		
+		When $n \geq m$, the matrix $\Sigma$ has at most $m$ nonzero elements on the diagonal. Therefore, it is possible to exactly represent $X$ using the economy SVD:
+		\[ X V^{*} = U \Sigma V^{*} V^{*} = [U^{'} U_{\perp}] 
+		\begin{bmatrix}
+			\Sigma^{'} \\
+			0
+		\end{bmatrix}
+		V^{*}
+		\]
+		The schematic of economy SVD is given below:
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.5\textwidth]{fig3.2.2.png}
+			\caption[MATLAB output for the previous command line]{Schematic of matrices in the Economy SVD (Brunton \& Kutz, 2019)\protect}
+			\label{fig:example}
+		\end{figure}
+		
+		The columns of $U_{\perp}$ span a vector space that is complementary and orthogonal to that spanned by $U^{'}$. The columns of $U$ are called left singular vectors of $X$ and the columns of $V$ are right singular vectors. The diagonal elements of $\Sigma^{'} \in \mathbb{C}^{m \times m}$ are called singular values and they are ordered from largest to smallest. The rank of $X$ is equal to the number of nonzero singular values.
+		
+		
+		\newpage
+		\subsection{Computing the SVD}
+		
+		\subsubsection{Calculation of SVD}
+		
+		Singular Value Decomposition (SVD) can be computed using various computational methods. Two popular algorithms for computing SVD are the Golub-Reinsch algorithm and the Lanczos algorithm.
+		
+		The Golub-Reinsch algorithm is an iterative method based on bidiagonalization and QR decomposition. It starts by reducing the input matrix to bidiagonal form using Householder transformations. Let $\mathbf{A}$ be the input matrix of size $m \times n$. The algorithm transforms $\mathbf{A}$ into bidiagonal form, represented as $\mathbf{B} = \mathbf{Q}_1^T \mathbf{A} \mathbf{P}_1$, where $\mathbf{Q}_1$ and $\mathbf{P}_1$ are orthogonal matrices. Then, it applies iterative QR decompositions on the resulting bidiagonal matrix until convergence is achieved. The singular values and corresponding singular vectors are obtained from the diagonal elements and orthogonal matrices obtained during the iterations. (Golub \& Reinsch, 1970)
+		
+		The Lanczos algorithm, on the other hand, is an iterative method that approximates the SVD by computing a partial decomposition. It is particularly useful when dealing with large sparse matrices. The algorithm constructs a tridiagonal matrix by repeatedly multiplying the input matrix with random vectors and orthogonalizing the results. Let $\mathbf{A}$ be the input matrix of size $n \times n$. The algorithm starts with a random vector $\mathbf{v}_1$ and generates a sequence of vectors $\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k$ using the Lanczos process. The resulting tridiagonal matrix is then diagonalized to obtain approximate singular values and singular vectors. (Simon, 1982)
+		
+		Computing SVD involves considerations of complexity and numerical stability. The computational complexity of SVD algorithms depends on the size of the input matrix. The Golub-Reinsch algorithm typically has a complexity of $O(n^3)$, where $n$ is the dimension of the input matrix. The Lanczos algorithm offers faster performance for large sparse matrices, achieving a complexity of $O(kn^2)$, where $k$ is the number of desired singular values.
+		
+		Numerical stability is crucial when computing SVD. Due to finite precision arithmetic, small numerical errors can accumulate during the computations, leading to inaccurate results. Matrix conditioning, ill-conditioned matrices, and round-off errors can affect the accuracy and reliability of the computed SVD. Techniques such as regularization, thresholding, and rank approximation can be applied to mitigate these issues.
+		
+		Overall, the choice of SVD algorithm depends on the characteristics of the input matrix, computational resources, and desired accuracy. It is essential to consider the complexity, numerical stability, and performance trade-offs when selecting an appropriate algorithm for SVD computation.
+		
+		\subsubsection{Interpretation of SVD}
+		Singular Value Decomposition (SVD) provides valuable insights into the structure and interpretation of the original data. The components of SVD, including the singular values, left singular vectors (columns of $\mathbf{U}$), and right singular vectors (columns of $\mathbf{V}$), play a key role in this interpretation.
+		
+		\subsubsubsection{Singular Values}
+		The singular values obtained from SVD represent the relative importance or significance of each component in the data. They are non-negative values arranged in descending order. Larger singular values correspond to components that capture more variation in the data. By examining the singular values, we can identify the most influential components that explain the underlying patterns or structure of the data.
+		
+		\subsubsubsection{Left Singular Vectors}
+		The left singular vectors, represented by the columns of the matrix $\mathbf{U}$, provide a basis for the row space of the original data matrix. These vectors are orthogonal to each other and form an orthonormal set. Each left singular vector corresponds to a principal component, and together, they capture different aspects of the data's structure. The left singular vectors can be used to reconstruct the original data or project new data points onto the principal components.
+		
+		\subsubsubsection{Right Singular Vectors}
+		The right singular vectors, represented by the columns of the matrix $\mathbf{V}$, provide a basis for the column space of the original data matrix. Similar to the left singular vectors, the right singular vectors are orthogonal and form an orthonormal set. These vectors represent the relationships between the variables or features in the data. They indicate how strongly each variable contributes to the principal components identified by the left singular vectors.
+		
+		Overall, SVD allows us to decompose the original data into its fundamental components, characterized by singular values, left singular vectors, and right singular vectors. This decomposition helps in understanding the inherent structure, relationships, and patterns present in the data. The interpretation of SVD components aids in dimensionality reduction, feature extraction, data visualization, and various other applications across domains.
+		
+		
+		
+		
+		\subsubsection{MATLAB calculation of SVD}
+		In this paper, MATLAB is used to demonstrate the calculation of SVD.
+		
+		
+		In MATLAB, the calculation of SVD is as below:
+		\begin{lstlisting}
+			X = randn(4,4); % Create a 4x4 random data matrix
+			[U,S,V] = svd(X) % Singular Value Decomposition
+		\end{lstlisting}
+		
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.5\textwidth]{fig3.2.png}
+			\caption[MATLAB output for the previous command line]{MATLAB calculation of a random 4x4 matrix (MATLAB R2022a)\protect}
+			\label{fig:example}
+		\end{figure}
+		\newpage
+		For non-square matrices \textbf{X}, the economy SVD is more efficient:
+		\begin{lstlisting}  
+			X = rand(6, 4); % Generate a random 6x4 matrix
+			[Uhat, Shat, V] = svd(X, 'econ'); % Compute the economy-sized SVD of the matrix X
+		\end{lstlisting}
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.5\textwidth]{fig3.2.1.png}
+			\caption[MATLAB output for the previous command line]{MATLAB calculation of a random 6x4 matrix (MATLAB R2022a)\protect}
+			\label{fig:example}
+		\end{figure}
+		
+		\newpage
+		\subsection{Matrix approximation}
+		One of the most valuable and distinctive characteristics of the SVD is its ability to deliver an optimal low-rank approximation for a matrix $X$. In fact, the SVD offers a hierarchy of such approximations, as retaining the first r singular values and vectors while discarding the remainder results in a rank-r approximation. 
+		
+		Schmidt, who is known for Gram-Schmidt, expanded the SVD concept to function spaces and devised an approximation theorem, which confirmed that the truncated SVD serves as the best low-rank approximation for the matrix $X$ in question. This approximation theorem, initially established by Schmidt, was later rediscovered by Eckart and Young and is occasionally referred to as the Eckart-Young theorem.
+		
+		\textbf{Theorem 1 (Eckart-Young):} The optimal rank-$r$ approximation to $X$, in a least-squares sense, is provided by the rank-$r$ SVD truncation $\tilde{X}$:
+		\[
+		\tilde{X} = \underset{\text{rank-r}}{\mathrm{argmin}} \lVert X - \tilde{X} \rVert_F = \tilde{U} \tilde{\Sigma} \tilde{V}^{*} (2)
+		\]
+		In this context, we define the notation for a truncated SVD basis and the corresponding approximated matrix $\tilde{X}$ as $\tilde{X} = \tilde{U} \tilde{\Sigma} \tilde{V}^{*}$. Given that $\Sigma$ has a diagonal structure, the rank-$r$ SVD approximation can be expressed as the summation of $r$ separate rank-1 matrices:
+		\[
+		\tilde{X} = \sigma_1 u_1 v_1^* + \sigma_2 u_2 v_2^* + \sigma_3 u_3 v_3^* + \cdots + \sigma_r u_r v_r^* (3)
+		\]
+		The dyadic summation is a key concept in this context. For any given rank $r$, no better approximation for $X$ exists in the $l_2$ sense than the truncated SVD approximation $\tilde{X}$. This implies that high-dimensional data can often be effectively represented by a few prominent patterns found in the columns of $\tilde{U}$ and $\tilde{V}$. This essential property of the SVD will be revisited numerous times. Many data sets consist of high-dimensional measurements, leading to a substantial data matrix $X$. However, it is common for such data to exhibit dominant low-dimensional patterns. The truncated SVD basis $\tilde{U}$ facilitates a coordinate transformation from the high-dimensional measurement space to a low-dimensional pattern space. As a result, the size and dimensionality of large data sets can be reduced, providing a manageable basis for visualization and analysis.
+		\newpage
+		\section{Dimensionality Reduction}
+		Singular Value Decomposition (SVD) is commonly used for dimensionality reduction by selecting a subset of singular values and their corresponding singular vectors. This reduction technique retains the most informative components while reducing the dimensionality of the data.
+		
+		\subsection{Selecting the Desired Number of Components}
+		The desired number of components to retain in dimensionality reduction using SVD depends on various criteria. One common approach is to choose a threshold based on the explained variance or cumulative energy. The explained variance represents the proportion of the total variance explained by each singular value. By setting a threshold (e.g., 95\% explained variance), we select the minimum number of singular values and vectors that collectively explain the desired percentage of the variance.
+		
+		Another criterion is based on the concept of intrinsic dimensionality. It assumes that the data lies on a low-dimensional manifold and aims to estimate the true underlying dimensionality. Techniques like scree plot analysis or Kaiser's rule can be used to identify an elbow point or a significant drop in the singular values, suggesting the intrinsic dimensionality.
+		
+		Additionally, domain-specific knowledge, computational resources, and the specific task at hand can influence the selection of the desired number of components.
+		
+		\subsection{Impact on Data Reconstruction}
+		Reducing the dimensionality of the data using SVD has an impact on data reconstruction. The reconstructed data is obtained by using a subset of singular values and their corresponding singular vectors. The number of components chosen determines the level of approximation or loss of information.
+		
+		Using a smaller number of components results in a compressed representation of the data. While some details might be lost, the major structure and trends are preserved. Increasing the number of components improves the reconstruction accuracy but may lead to overfitting or capturing noise in the data.
+		
+		It is important to strike a balance between reducing dimensionality and preserving meaningful information. Validation techniques, such as cross-validation, can help evaluate the impact of different numbers of components on the desired task, such as classification or regression performance.
+		
+		Overall, dimensionality reduction using SVD offers a flexible approach to capture the most important components in the data while reducing its dimensionality. The selection of the desired number of components involves considering various criteria and trade-offs to strike the right balance between data compression and information preservation.
+		
+		\section{Applications of SVD}
+		Singular Value Decomposition (SVD) finds application in a wide range of fields due to its versatility and effectiveness. Some prominent applications of SVD include image compression, recommendation systems, data mining, text analysis, and signal processing.
+		
+		\subsection{Image Compression}
+		SVD plays a vital role in image compression techniques such as JPEG. By applying SVD to the image matrix, it can be decomposed into singular values and corresponding singular vectors. The singular values can be selectively truncated by keeping only the most significant ones, leading to data compression. The resulting low-rank approximation enables efficient storage and transmission of images without significant loss of visual quality. This technique reduces the storage space required for images while enabling fast transmission over networks.
+		
+		For example, in medical imaging, SVD-based compression allows the storage and transmission of large medical image databases while preserving diagnostic information. Similarly, in satellite imaging, SVD-based compression helps in reducing the storage and transmission costs of high-resolution satellite images.
+		
+		\subsection{Recommendation Systems}
+		SVD is widely used in recommendation systems to provide personalized recommendations to users. By decomposing the user-item rating matrix using SVD, it is possible to identify latent factors or features that represent user preferences and item characteristics. The low-rank approximation obtained through SVD allows for efficient representation and computation. This approach enables accurate prediction of missing ratings and recommendation of relevant items to users.
+		
+		For instance, platforms like Netflix and Amazon employ SVD-based recommendation algorithms to suggest movies, TV shows, and products based on user preferences and behavior. By leveraging SVD, these systems can handle large datasets and provide personalized recommendations to millions of users efficiently.
+		
+		\subsection{Data Mining}
+		SVD finds applications in data mining tasks such as clustering, dimensionality reduction, and outlier detection. By applying SVD to the data matrix, it is possible to identify the most important features or dimensions that capture the underlying structure of the data. This dimensionality reduction facilitates more efficient data mining algorithms by reducing the computational complexity and removing noise or irrelevant features.
+		
+		For example, in gene expression analysis, SVD is used to identify the most significant genes and reduce the dimensionality of high-dimensional gene expression datasets. This enables the discovery of meaningful patterns and relationships among genes.
+		
+		\subsection{Text Analysis}
+		SVD is applied in natural language processing and text analysis tasks. By representing a large text corpus as a term-document matrix, SVD can extract latent semantic information. This allows for dimensionality reduction, topic modeling, document clustering, and similarity calculations.
+		
+		In information retrieval, SVD-based techniques like Latent Semantic Indexing (LSI) are used to improve the accuracy of document retrieval by capturing the semantic relationships between words and documents. SVD helps in uncovering hidden thematic structures within text data, enabling more effective search and analysis.
+		
+		\subsection{Signal Processing}
+		SVD is utilized in various signal processing applications such as audio and video processing, speech recognition, and channel equalization. By decomposing the signal matrix using SVD, it is possible to analyze and extract the most important components or features. This enables tasks like denoising, compression, and feature extraction.
+		
+		In speech recognition, SVD is employed to capture the principal components of speech signals and reduce the dimensionality of the feature space. This aids in accurate speech recognition even in noisy environments.
+		
+		Overall, SVD offers a powerful and versatile tool across a wide range of applications. It enables efficient image compression, personalized recommendations, effective data mining, insightful text analysis, and advanced signal processing. By leveraging the benefits of SVD, these applications can achieve improved efficiency, accuracy, and performance.
+		
+		z\section{Truncation}
+		The truncated SVD is depicted in Fig. 5, where $\tilde{U}$, $\tilde{\Sigma}$, and $\tilde{V}$ represent the truncated matrices. In cases where $X$ does not possess full rank, some of the singular values in $\hat{\Sigma}$ might be zero, allowing the truncated SVD to remain exact. Nevertheless, when the truncation value $r$ is less than the number of non-zero singular values (i.e., the rank of $X$), the truncated SVD provides only an approximation of $X$:
+		
+		\[ 
+		X \approx \tilde{U} \tilde{\Sigma} \tilde{V}^{*} \ (4) 
+		\]
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.5\textwidth]{fig3.4.1.png}
+			\caption[MATLAB output for the previous command line]{Schematic of the truncated SVD. The subscript 'rem' denotes the remainder of $\hat{U}$, $\hat{\Sigma}$, or $\hat{V}$ after truncation. (Brunton \& Kutz, 2019)\protect}
+			\label{fig:example}
+		\end{figure}
+		
+		\newpage
+		\section{MATLAB implementation of truncated SVD}
+		Consider the image of a house shown in Fig. 6. This image has dimensions of 2000 x 1500 pixels. It is possible to perform the SVD on this image and plot the diagonal singular values, as demonstrated in Fig. 1.4. Figure 1.3 displays the approximate matrix $\tilde{X}$ for various truncation values $r$. When $r = 100$, the reconstructed image is quite accurate, and the singular values account for nearly 80\% of the image variance. The SVD truncation leads to a compression of the original image, as only the first 100 columns of $U$ and $V$, along with the first 100 diagonal elements of $\Sigma$, need to be stored in $\tilde{U}$, $\tilde{\Sigma}$, and $\tilde{V}$.
+		
+		First, we load the image into MATLAB as shown:
+		\begin{lstlisting}
+			% Read the image file
+			A = imread('fig6.jpg');
+			
+			% Convert the RGB image to grayscale and cast it to double precision
+			X = double(rgb2gray(A));
+			
+			% Get the dimensions of the grayscale image
+			nx = size(X, 1);
+			ny = size(X, 2);
+			
+			% Display the grayscale image, remove axis, and set colormap to gray
+			imagesc(X);
+			axis off;
+			colormap gray;
+			
+		\end{lstlisting}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.5\textwidth]{fig5.png}
+			\caption[Original Fig. 6]{Original Fig. 6\protect}
+			\label{fig:example}
+		\end{figure}
+		
+		
+		
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=1\textwidth]{fig7s1.png}
+			\caption[7s1]{Fig. 6 after running the code above\protect}
+			\label{fig:example}
+		\end{figure}
+		After that, we take the SVD
+		\begin{lstlisting}
+			[U,S,V] = svd(X);
+		\end{lstlisting}
+		Next, we compute the approximate matrix using truncated SVD for 4 different ranks ($r=5,20,100,1500$)
+		\begin{lstlisting}
+			for r = [5 20 100 1500] % Truncation value
+			Xapprox = U(:, 1:r) * S(1:r, 1:r) * V(:, 1:r).'; % Approx. image
+			
+			% Display the approximated image and set title
+			figure, imagesc(Xapprox), axis off;
+			colormap gray;
+			title(['r=', num2str(r, '%d')]);
+			end   
+		\end{lstlisting}
+		This is the result after running the previous code for $r=5; r=20$; $r=100$ and $r=1500$:
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.5\textwidth]{fig5.png}
+			\caption[Original]{Original photo\protect}
+			\label{fig:example}
+		\end{figure}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.51\textwidth]{5.jpg}
+			\caption[r=5]{r=5\protect}
+			\label{fig:example}
+		\end{figure}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.51\textwidth]{20.jpg}
+			\caption[r=20]{r=20\protect}
+			\label{fig:example}
+		\end{figure}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.51\textwidth]{100.jpg}
+			\caption[r=100]{r=100\protect}
+			\label{fig:example}
+		\end{figure}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.51\textwidth]{r=1500.jpg}
+			\caption[r=1500]{r=1500\protect}
+			\label{fig:example}
+		\end{figure}
+		
+		\begin{table}[htbp]
+			\centering
+			\caption{Comparison of Photo Compression Ratio with SVD}
+			\label{tab:compression-ratio}
+			\begin{tabular}{|c|c|c|}
+				\hline
+				\textbf{Value of r} & \textbf{File Size (KB)} & \textbf{Figure Reference} \\
+				\hline
+				Original Photo & 245 & Fig. 8 \\
+				\hline
+				r = 5 & 97 & Fig. 9 \\
+				\hline
+				r = 20 & 132 & Fig. 10 \\
+				\hline
+				r = 100 & 199 & Fig. 11 \\
+				\hline
+				r = 1500 & 244 & Fig. 12 \\
+				\hline
+			\end{tabular}
+		\end{table}
+		
+		
+		
+		
+		\newpage
+		
+		Finally, we plot the singular values and cumulative energy in Fig. 12 in MATLAB:
+		\begin{lstlisting}
+			figure;
+			subplot(1,2,1), semilogy(diag(S),'k')
+			subplot(1,2,2), plot(cumsum(diag(S))/sum(diag(S)),'k')
+		\end{lstlisting}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.5\textwidth]{regr.jpg}
+			\caption[regression]{Singular values and cumulative energy\protect}
+			\label{fig:example}
+		\end{figure}
+		\newpage
+		\section{Comparison with Other Methods}
+		When considering matrix factorization techniques, it is helpful to compare Singular Value Decomposition (SVD) with other commonly used methods, such as Principal Component Analysis (PCA), Non-negative Matrix Factorization (NMF), and Latent Semantic Analysis (LSA). The following table highlights the similarities, differences, and advantages of SVD over these methods:
+		
+		\begin{table}[htbp]
+			\begin{center}
+				\renewcommand{\arraystretch}{1.5} % Adjust the row height
+				\caption{Comparison of Methods: SVD, PCA, NMF, and LSA}
+				\label{tab:method-comparison}
+				\begin{tabular}{|l|l|l|l|}
+					\hline
+					\textbf{Method} & \textbf{Similarities with SVD} & \textbf{Differences from SVD} & \textbf{Advantages of SVD} \\
+					\hline
+					PCA & - Both techniques perform & - PCA assumes that the & - SVD provides an exact \\
+					& matrix factorization and & input data is centered, & factorization of the \\
+					& extract principal components & whereas SVD works on & original matrix, whereas \\
+					& from the data. & any arbitrary matrix. & PCA is an approximation. \\
+					\hline
+					NMF & - Both techniques decompose & - NMF enforces non-negativity & - SVD allows both positive \\
+					& a matrix into a product of & on the factors, leading to & and negative values in \\
+					& lower-rank matrices. & parts-based representation. & the factors, which can \\
+					& & - SVD provides an exact & be useful for capturing \\
+					& & factorization, while NMF & both positive and negative \\
+					& & is an approximation. & relationships. \\
+					\hline
+					LSA (Latent & - Both techniques aim to & - LSA is specifically & - SVD provides a more \\
+					Semantic & capture latent semantic & designed for text & general-purpose matrix \\
+					Analysis) & information in textual data. & analysis tasks such as & factorization technique \\
+					& & document clustering and & that can be applied to \\
+					& & retrieval. & various types of data. \\
+					\hline
+				\end{tabular}
+			\end{center}
+		\end{table}
+		
+		
+		Some advantages of SVD over other methods are:
+		
+		1. \textbf{Exact Factorization}: SVD provides an exact factorization of the original matrix, while techniques like PCA and LSA involve approximations.
+		
+		2. \textbf{Flexibility}: SVD can be applied to any arbitrary matrix, making it a versatile technique applicable to various domains. In contrast, NMF enforces non-negativity constraints on the factors, limiting its use in certain scenarios. SVD is needed in abstract mathematics, matrix decomposition, and quantum physics whereas PCA is applied mainly in statistics, specifically in analyzing exploratory data. (Celine, 2012)
+		
+		3. \textbf{Capture of Positive and Negative Relationships}: SVD allows both positive and negative values in the factors, which can be beneficial for capturing and interpreting relationships that have both positive and negative influences.
+		
+		In summary, SVD offers a powerful and flexible matrix factorization technique that provides an exact factorization and allows for both positive and negative relationships, making it advantageous in many applications.
+		
+		\section{Practical Considerations}
+		When applying Singular Value Decomposition (SVD), several practical considerations should be taken into account to ensure accurate and meaningful results. These considerations include:
+		
+		\begin{itemize}
+			\item \textbf{Data Preprocessing}: It is often beneficial to preprocess the data before applying SVD, such as by centering the data or normalizing the variables, to mitigate the impact of differences in scales or magnitudes.
+			
+			\item \textbf{Handling Missing Values}: SVD assumes complete data, so it is necessary to handle missing values appropriately. Techniques such as imputation or matrix completion methods can be used to address missing values before applying SVD.
+			
+			\item \textbf{Dealing with Large Datasets}: SVD can be computationally expensive for large datasets. To address this, techniques such as randomized SVD or incremental SVD can be employed to approximate the decomposition while reducing the computational burden.
+			
+			\item \textbf{Selecting Appropriate Algorithms or Software Libraries}: Various algorithms and software libraries are available for computing SVD. The choice depends on factors such as the size of the dataset, desired accuracy, and available computational resources. Popular libraries include SciPy, NumPy, and MATLAB.
+		\end{itemize}
+		
+		\section{Limitations and Challenges}
+		While SVD is a powerful technique, it is important to be aware of its limitations and challenges. Some of these include:
+		
+		\begin{itemize}
+			\item \textbf{Sensitivity to Outliers}: SVD is sensitive to outliers in the data, which can distort the decomposition and lead to inaccurate results. Outlier detection and removal techniques may be necessary prior to applying SVD.
+			
+			\item \textbf{Memory Requirements}: SVD requires the entire dataset to be stored in memory, which can be challenging for large datasets. Memory-efficient algorithms or distributed computing frameworks may be needed to handle such scenarios.
+			
+			\item \textbf{Interpretation of Components}: Interpreting the resulting components can be challenging, particularly when dealing with high-dimensional datasets. The meaning of the components may not always be clear, and domain knowledge is often required for meaningful interpretation.
+		\end{itemize}
+		
+		\section{Conclusion}
+		Singular Value Decomposition (SVD) is a fundamental matrix factorization technique with diverse applications in data analysis and beyond. It provides valuable insights into the underlying structure and relationships within the data. By decomposing a matrix into singular values, left singular vectors, and right singular vectors, SVD allows us to understand the contributions of different components and perform dimensionality reduction.
+		
+		Despite its limitations and challenges, SVD remains a widely used and important tool in various fields such as image compression, recommendation systems, text analysis, and signal processing. Future developments in SVD may focus on addressing computational efficiency, scalability, and robustness to outliers, as well as improving the interpretability of the resulting components.
+		
+		In summary, SVD offers a powerful framework for data analysis, enabling researchers and practitioners to uncover valuable insights and make informed decisions based on the underlying structure of the data.
+	}
+	\newpage
+	
+	\section{References}
+	{\justifying
+		
+		[1]   Brunton, S. L., \& Kutz, J. N. (2019). \textbf{Singular Value Decomposition (SVD)}. In Cambridge University Press eBooks (pp. 3–46). \url{https://doi.org/10.1017/9781108380690.002}
+		
+		[2]   Celine. (2012). \textbf{Differences Between Singular Value Decomposition (SVD) and Principal Component Analysis (PCA) | Difference Between}. \textit{Difference Between}. \url{http://www.differencebetween.net/science/mathematics-statistics/differences-between-singular-value-decomposition-svd-and-principal-component-analysis-pca/}
+		
+		[3]   Gillis, N. (2014). \textbf{The Why and How of Nonnegative Matrix Factorization}. \textit{ResearchGate}. \url{https://www.researchgate.net/publication/259824199_The_Why_and_How_of_Nonnegative_Matrix_Factorization}
+		
+		[4]   Golub, G. H., \& Reinsch, C. (1970). \textbf{Singular value decomposition and least squares solutions}. \textit{Numerische Mathematik}, \textit{14}(5), 403–420. \url{https://doi.org/10.1007/bf02163027}
+		
+		[5]   Greenacre, M., Groenen, P. J. F., Hastie, T., D’Enza, A. I., Markos, A., \& Tuzhilina, E. (2022). \textbf{Principal component analysis}. \textit{Nature Reviews Methods Primers}, \textit{2}(1). \url{https://doi.org/10.1038/s43586-022-00184-w}
+		
+		[6]   Hastings, P. M. (2004). \textbf{Latent Semantic Analysis}. \textit{ResearchGate}. \url{https://www.researchgate.net/publication/230854757_Latent_Semantic_Analysis}
+		
+		[7]   Rajamanickam, S. (2009). \textbf{Efficient Algorithms for Sparse Singular Value Decomposition}. \textit{ResearchGate}. \url{https://www.researchgate.net/publication/259970729_Efficient_Algorithms_for_Sparse_Singular_Value_Decomposition}
+		
+		[8]   Simon, H. D. (1982). \textbf{The Lanczos Algorithm for Solving Symmetric Linear Systems}. \textit{ResearchGate}. \url{https://www.researchgate.net/publication/235084574_The_Lanczos_Algorithm_for_Solving_Symmetric_Linear_Systems}
+	}
+	
+	
+	
+	
+	
+	
+	
+\end{document}
